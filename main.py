@@ -64,4 +64,32 @@ for filepath in filepaths:
         pdf.cell(w=25, h=8, txt=str(
             row["total_price"]), border=1, ln=1, align='C')
 
+    # Add the total price to the pdf
+
+    total_price = df["total_price"].sum()
+
+    pdf.set_font(family="Times", size=12, style='B')
+    pdf.set_text_color(80, 80, 80)
+
+    pdf.cell(w=30, h=8, txt="", border=1, ln=0, align='L')
+    pdf.cell(w=70, h=8, txt="", border=1, ln=0, align='L')
+    pdf.cell(w=40, h=8, txt="", border=1, ln=0, align='C')
+    pdf.cell(w=30, h=8, txt="", border=1, ln=0, align='C')
+    pdf.cell(w=25, h=8, txt=str(total_price), border=1, ln=1, align='C')
+
+    pdf.cell(w=50, h=8, txt=" ", ln=1, align='L')  # Add a 2 space line
+    pdf.cell(w=50, h=8, txt=" ", ln=1, align='L')
+
+    pdf.set_font(family="Times", size=14, style='B')
+    pdf.set_text_color(80, 80, 80)
+    pdf.cell(
+        w=30, h=8, txt=f"Your Total Amount is: {total_price} USD", ln=1, align='L')
+
+    # if you want to add a logo and company name to the pdf, you can use the following code
+
+    # pdf.set_font(family="Times", size=14, style='B')
+    # pdf.set_text_color(80, 80, 80)
+    # pdf.cell(w=30, h=8, txt=f"Your Company Name", ln=1, align='L')
+    # pdf.image("Yourlogo.png", x=10, y=10, w=50)
+
     pdf.output(f"PDFs/{filename}.pdf")
